@@ -1,0 +1,97 @@
+{
+  "generated_at": "2026-08-13",
+  "target_directory": "sports-personality-website/assets/logos",
+  "total_target_entities": 10,
+  "downloaded": 8,
+  "not_found": 2,
+  "logos": [
+    {
+      "entity": "الكنفدرالية الإفريقية لكرة القدم (CAF)",
+      "entity_en": "Confederation of African Football",
+      "filename": "caf.png",
+      "size_px": "2000x1863",
+      "status": "downloaded",
+      "source": "https://upload.wikimedia.org/wikipedia/ar/7/72/Confederation_of_African_Football_logo.svg",
+      "notes": "تحويل SVG إلى PNG عبر متصفح (رفض ImageMagick تطبيق viewBox)"
+    },
+    {
+      "entity": "الاتحاد الليبي لكرة القدم (LFF)",
+      "entity_en": "Libyan Football Federation",
+      "filename": "libya-football-federation.png",
+      "size_px": "250x402",
+      "status": "downloaded",
+      "source": "https://upload.wikimedia.org/wikipedia/ar/0/01/Libyan_Football_Federation_Logo.png",
+      "notes": "مصدر ويكيبيديا العربية، أعيدت المحاولة بعد انتهاء تقييد 429"
+    },
+    {
+      "entity": "جامعة طرابلس",
+      "entity_en": "University of Tripoli",
+      "filename": "university-of-tripoli.png",
+      "size_px": "263x248",
+      "status": "downloaded",
+      "source": "https://www.uot.edu.ly/showimage.php?filename=logo/uotlogo.png"
+    },
+    {
+      "entity": "جامعة الزاوية",
+      "entity_en": "University of Zawia",
+      "filename": "university-of-zawia.png",
+      "size_px": "827x337",
+      "status": "downloaded",
+      "source": "https://zu.edu.ly/images/static/logoz.png"
+    },
+    {
+      "entity": "الأكاديمية الأولمبية الليبية",
+      "entity_en": "Libyan Olympic Academy",
+      "filename": null,
+      "size_px": null,
+      "status": "not_found",
+      "source": null,
+      "notes": "لا يوجد شعار مستقل موثق عبر الإنترنت؛ الأكاديمية تتبع اللجنة الأولمبية الليبية (مقرها مجمع طرابلس الرياضي)"
+    },
+    {
+      "entity": "Catapult (نظام GPS لتحليل الأداء)",
+      "entity_en": "Catapult Sports",
+      "filename": "catapult.png",
+      "size_px": "1600x423",
+      "status": "downloaded",
+      "source": "https://www.catapult.com/ (SVG شعار الهيدر الرسمي)",
+      "notes": "أعيد تلوينه للون الأسود #1a1a1a"
+    },
+    {
+      "entity": "قناة ليبيا الرياضية",
+      "entity_en": "Libya Sport TV",
+      "filename": "libya-sport-tv.png",
+      "size_px": "200x150",
+      "status": "downloaded",
+      "source": "https://www.lyngsat.com/logo/tv/ll/libya-sport-tv-1-ly.png",
+      "notes": "LyngSat يفرض 403 على التنزيل المباشر؛ تم عبر fetch داخل المتصفح"
+    },
+    {
+      "entity": "الأكاديمية البريطانية (سوسة، تونس) - تخصص أخصائي التغذية الرياضية 2023",
+      "entity_en": "British Academy for Training & Development (BATD)",
+      "filename": "british-academy.png",
+      "size_px": "234x200",
+      "status": "downloaded",
+      "source": "https://batdacademy.com/assets/base/img/layout/logos/logo-ba.webp",
+      "notes": "تحويل WEBP إلى PNG. الدورة المطابقة: Sports Nutrition Specialist Preparation Course"
+    },
+    {
+      "entity": "الأكاديمية الفرنسية (الجزائر) - الإعداد البدني المتقدم 2020",
+      "entity_en": "French Academy (Algeria)",
+      "filename": null,
+      "size_px": null,
+      "status": "not_found",
+      "source": null,
+      "notes": "لا وجود موثق لأكاديمية فرنسية للتدريب الرياضي في الجزائر بهذا الشعار؛ لا يمكن تحديد هوية موثوقة"
+    },
+    {
+      "entity": "الأكاديمية السويدية للتدريب الرياضي (سكاريا، تركيا) - الإعداد البدني المستوى الأول 2019",
+      "entity_en": "Swedish Academy of Sport Training (SAST)",
+      "filename": "swedish-academy.png",
+      "size_px": "175x67",
+      "status": "downloaded",
+      "source": "https://swedish-academy.se/assets/img/general/logo-sast.png",
+      "notes": "تأسست في السويد 2014 وتناسب دورة الإعداد البدني في السيرة الذاتية"
+    }
+  ]
+}

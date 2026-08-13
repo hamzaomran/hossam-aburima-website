@@ -942,3 +942,157 @@ a.contact-card:hover {
     font-size: 0.95rem;
   }
 }
+
+/* ===== زر لوحة التحكم ===== */
+.admin-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  border: 1px solid var(--bg-line);
+  background: var(--bg-card);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.admin-link:hover {
+  color: var(--gold);
+  border-color: rgba(233, 196, 106, 0.5);
+  transform: rotate(30deg);
+}
+
+.about-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ===== جهات العمل ===== */
+.partners {
+  background: var(--bg-soft);
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.partner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--bg-line);
+  border-radius: var(--radius);
+  padding: 26px 16px;
+  transition: var(--transition);
+}
+
+.partner:hover {
+  transform: translateY(-5px);
+  border-color: rgba(233, 196, 106, 0.4);
+  box-shadow: var(--shadow);
+}
+
+.partner img {
+  height: 56px;
+  max-width: 90%;
+  object-fit: contain;
+  filter: grayscale(1) brightness(1.4) opacity(0.85);
+  transition: var(--transition);
+}
+
+.partner:hover img {
+  filter: none;
+}
+
+.partner span {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ===== الأقسام المميزة ===== */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-line);
+  border-radius: var(--radius);
+  padding: 34px 26px;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(233, 196, 106, 0.5);
+  box-shadow: var(--shadow);
+}
+
+.feature-ico {
+  width: 66px;
+  height: 66px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(233, 196, 106, 0.16), rgba(212, 175, 55, 0.08));
+  border: 1px solid rgba(233, 196, 106, 0.4);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.feature-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.center-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ===== التجاوب للأقسام الجديدة ===== */
+@media (max-width: 992px) {
+  .partners-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
+    max-width: 460px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

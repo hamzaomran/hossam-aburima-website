@@ -3,6 +3,120 @@
   background: var(--bg);
 }
 
+.admin-content {
+  min-height: 100vh;
+}
+
+/* ===== شاشة الدخول ===== */
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  background:
+    radial-gradient(700px 400px at 85% -10%, rgba(212, 175, 55, 0.14), transparent 60%),
+    radial-gradient(600px 400px at 5% 110%, rgba(53, 194, 140, 0.08), transparent 60%),
+    linear-gradient(180deg, #0b1220 0%, var(--bg) 100%);
+}
+
+.login-card {
+  width: min(420px, 100%);
+  background: var(--bg-card);
+  border: 1px solid var(--bg-line);
+  border-radius: 22px;
+  padding: 42px 36px;
+  text-align: center;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.login-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: #141b0a;
+  font-weight: 900;
+  font-size: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 30px rgba(212, 175, 55, 0.35);
+}
+
+.login-card h1 {
+  font-size: 1.7rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.login-sub {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 28px;
+}
+
+.login-form {
+  text-align: right;
+}
+
+.login-form .form-group {
+  margin-bottom: 18px;
+}
+
+.login-form label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-bottom: 7px;
+  color: var(--text);
+}
+
+.login-form input {
+  width: 100%;
+  background: var(--bg-soft);
+  border: 1px solid var(--bg-line);
+  border-radius: 11px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 13px 14px;
+  transition: var(--transition);
+  outline: none;
+}
+
+.login-form input:focus {
+  border-color: rgba(233, 196, 106, 0.6);
+  box-shadow: 0 0 0 3px rgba(233, 196, 106, 0.12);
+}
+
+.login-error {
+  min-height: 20px;
+  color: #ff5f6d;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.btn-block {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.login-back {
+  display: inline-block;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: color var(--transition);
+}
+
+.login-back:hover {
+  color: var(--gold);
+}
+
 .admin-section {
   padding-top: 40px;
 }

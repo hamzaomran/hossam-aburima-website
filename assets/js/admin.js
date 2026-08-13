@@ -2,6 +2,167 @@
   var S = window.HAStorage;
   if (!S) return;
 
+  /* ============================================================
+     نظام الدخول — اسم مستخدم + كلمة مرور (حماية على مستوى المتصفح)
+     كلمة المرور تُخزَّن كـ SHA-256 (غير قابلة للقراءة العكسية)
+     ============================================================ */
+  var CONFIG_KEY = "ha_admin_config";
+  var AUTH_KEY = "ha_admin_auth";
+  var DEFAULT_USER = "admin";
+  var DEFAULT_PASS = "hossam2026";
+
+  var loginScreen = document.getElementById("loginScreen");
+  var adminContent = document.getElementById("adminContent");
+
+  function randSalt() {
+    return "s" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+  }
+
+  function sha256(text) {
+    if (!crypto || !crypto.subtle) return null;
+    return crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)).then(function (buf) {
+      return Array.from(new Uint8Array(buf)).map(function (b) {
+        return b.toString(16).padStart(2, "0");
+      }).join("");
+    });
+  }
+
+  function getConfig() {
+    try { return JSON.parse(localStorage.getItem(CONFIG_KEY)); } catch (e) { return null; }
+  }
+
+  function ensureConfig() {
+    var cfg = getConfig();
+    if (cfg && cfg.u && cfg.ph && cfg.s) return Promise.resolve(cfg);
+    var salt = randSalt();
+    return sha256(DEFAULT_PASS + salt).then(function (hash) {
+      cfg = { u: DEFAULT_USER, ph: hash, s: salt };
+      localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg));
+      return cfg;
+    });
+  }
+
+  function isAuthed() {
+    return sessionStorage.getItem(AUTH_KEY) === "1";
+  }
+
+  function showPanel() {
+    if (loginScreen) loginScreen.classList.add("hidden");
+    if (adminContent) adminContent.classList.remove("hidden");
+  }
+
+  function showLogin() {
+    if (loginScreen) loginScreen.classList.remove("hidden");
+    if (adminContent) adminContent.classList.add("hidden");
+  }
+
+  function logout() {
+    sessionStorage.removeItem(AUTH_KEY);
+    showLogin();
+    if (loginScreen) {
+      var u = document.getElementById("loginUser");
+      var p = document.getElementById("loginPass");
+      if (u) u.value = "";
+      if (p) p.value = "";
+    }
+  }
+
+  /* جلسة دخول محاولات */
+  var failedAttempts = 0;
+  var lockUntil = 0;
+
+  function applyGate() {
+    if (isAuthed()) { showPanel(); } else { showLogin(); }
+  }
+
+  var loginForm = document.getElementById("loginForm");
+  var loginError = document.getElementById("loginError");
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var user = document.getElementById("loginUser");
+      var pass = document.getElementById("loginPass");
+      var u = user ? user.value.trim() : "";
+      var p = pass ? pass.value : "";
+
+      if (loginError) loginError.textContent = "";
+
+      if (Date.now() < lockUntil) {
+        var wait = Math.ceil((lockUntil - Date.now()) / 1000);
+        if (loginError) loginError.textContent = "تم حظر المحاولات مؤقتًا. انتظر " + wait + " ثانية.";
+        return;
+      }
+
+      ensureConfig().then(function (cfg) {
+        sha256(p + cfg.s).then(function (hash) {
+          if (u === cfg.u && hash === cfg.ph) {
+            failedAttempts = 0;
+            sessionStorage.setItem(AUTH_KEY, "1");
+            showPanel();
+            if (loginError) loginError.textContent = "";
+            toast("مرحبًا بك في لوحة التحكم");
+          } else {
+            failedAttempts++;
+            if (failedAttempts >= 5) {
+              lockUntil = Date.now() + 30000;
+              failedAttempts = 0;
+              if (loginError) loginError.textContent = "محاولات كثيرة خاطئة. أعد المحاولة بعد 30 ثانية.";
+            } else {
+              if (loginError) loginError.textContent = "اسم المستخدم أو كلمة المرور غير صحيحة.";
+            }
+          }
+        });
+      });
+    });
+  }
+
+  var logoutBtns = document.querySelectorAll("[id^='logoutBtn']");
+  logoutBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      logout();
+      toast("تم تسجيل الخروج");
+    });
+  });
+
+  /* ===== تغيير كلمة المرور ===== */
+  var passForm = document.getElementById("passForm");
+  if (passForm) {
+    passForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var cur = document.getElementById("curPass").value;
+      var newUser = document.getElementById("newUser").value.trim();
+      var newPass = document.getElementById("newPass").value;
+      var confirm = document.getElementById("confirmPass").value;
+
+      if (newPass.length < 8) { toast("كلمة المرور الجديدة قصيرة — 8 أحرف على الأقل", true); return; }
+      if (newPass !== confirm) { toast("تأكيد كلمة المرور غير مطابق", true); return; }
+
+      ensureConfig().then(function (cfg) {
+        sha256(cur + cfg.s).then(function (hash) {
+          if (hash !== cfg.ph) {
+            toast("كلمة المرور الحالية غير صحيحة", true);
+            return;
+          }
+          var salt = randSalt();
+          sha256(newPass + salt).then(function (newHash) {
+            cfg.u = newUser || cfg.u;
+            cfg.s = salt;
+            cfg.ph = newHash;
+            localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg));
+            document.getElementById("curPass").value = "";
+            document.getElementById("newPass").value = "";
+            document.getElementById("confirmPass").value = "";
+            document.getElementById("newUser").value = "";
+            toast("تم تحديث بيانات الدخول بنجاح");
+          });
+        });
+      });
+    });
+  }
+
+  applyGate();
+
   /* ===== التبويبات ===== */
   var tabs = document.querySelectorAll(".admin-tab");
   tabs.forEach(function (tab) {
